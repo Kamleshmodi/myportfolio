@@ -1,0 +1,16 @@
+# Python & Django
+__pycache__/
+*.py[cod]
+db.sqlite3
+media/
+
+# Virtual Environment
+venv/
+env/
+
+# Security & Secrets
+.env
+
+# VS Code / OS files
+.vscode/
+.DS_Store

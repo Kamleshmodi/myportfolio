@@ -1,0 +1,428 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamlesh Kumar Ghanchi | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+        .cert-card { background: var(--color-grey-5); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--color-secondary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .cert-card:hover { transform: translateY(-5px); border-left: 5px solid var(--color-white); }
+        .cert-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--color-white); display: flex; align-items: center; gap: 8px;}
+        .cert-card p { color: var(--color-grey-2); font-size: 0.9rem; margin-bottom: 10px;}
+        .verify-link { display: inline-block; font-size: 0.85rem; color: var(--color-secondary); text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+        .verify-link:hover { color: var(--color-white); transform: translateX(5px); }
+        .submit-btn button { background-color: transparent; outline: none; border: none; font-family: inherit; font-size: inherit; color: inherit; cursor: pointer; padding: 0;}
+    </style>
+</head>
+<body class="main-content">
+    
+    <header class="container header active" id="home">
+        <div class="header-content">
+            <div class="left-header">
+                <div class="h-shape"></div>
+                <div class="image">
+                    <img src="{% static 'img/hero.png' %}" alt="Kamlesh Kumar Ghanchi">
+                </div>
+            </div>
+            <div class="right-header">
+                <h1 class="name">
+                    Hi, I'm <span>{{ profile.name|default:"Kamlesh Kumar Ghanchi" }}.</span>
+                    Web Developer & Cybersecurity Enthusiast.
+                </h1>
+                <p>
+                    {{ profile.about_text|default:"I am a results-driven Full Stack Web Developer with a strong foundation in secure application development, computer networking, and cybersecurity. I specialize in Python, Django, and Laravel, blending clean code with robust security practices to build reliable digital solutions." }}
+                </p>
+                <div class="btn-con">
+                    <a href="{% if profile.resume %}{{ profile.resume.url }}{% else %}{% static 'KAMLESH_RESUME5.pdf' %}{% endif %}" class="main-btn" target="_blank">
+                        <span class="btn-text">Download CV</span>
+                        <span class="btn-icon"><i class="fas fa-download"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container about" id="about">
+            <div class="main-title">
+                <h2>About <span>me</span><span class="bg-text">My Stats</span></h2>
+            </div>
+            <div class="about-container">
+                <div class="left-about">
+                    <h4>Who am I?</h4>
+                    <p>
+                        I am an enthusiastic IT graduate currently pursuing my Integrated Master of Computer Applications (IMCA) at LJ University. 
+                        <br><br>
+                        My passion lies at the intersection of Development and Security. Whether it's building scalable e-commerce platforms using Django MVT architecture or analyzing network vulnerabilities and configuring firewalls, I aim to deliver high-impact, secure enterprise environments. I am also actively engaged in research, having recently authored a technical chapter on IoT Network Security.
+                    </p>
+                    <div class="btn-con">
+                        <a href="https://www.linkedin.com/in/kamlesh-kumar-ghanchi-6745262a8/" target="_blank" class="main-btn">
+                            <span class="btn-text">My LinkedIn</span>
+                            <span class="btn-icon"><i class="fab fa-linkedin-in"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="right-about">
+                    <div class="about-item">
+                        <div class="abt-text">
+                            <p class="large-text">18+</p>
+                            <p class="small-text">Certifications <br /> Achieved</p>
+                        </div>
+                    </div>
+                    <div class="about-item">
+                        <div class="abt-text">
+                            <p class="large-text">7+</p>
+                            <p class="small-text">Full Stack <br /> Projects</p>
+                        </div>
+                    </div>
+                    <div class="about-item">
+                        <div class="abt-text">
+                            <p class="large-text">7.9</p>
+                            <p class="small-text">Current CGPA <br /> (IMCA)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-stats">
+                <h4 class="stat-title">My Technical Arsenal</h4>
+                <div class="progress-bars">
+                    <div class="progress-bar">
+                        <p class="prog-title">Web Dev (Django, Laravel, Python, JS)</p>
+                        <div class="progress-con"><p class="prog-text">90%</p><div class="progress"><span class="html" style="width: 90%;"></span></div></div>
+                    </div>
+                    <div class="progress-bar">
+                        <p class="prog-title">Cybersecurity (Pen-testing, Vulnerability Scanning)</p>
+                        <div class="progress-con"><p class="prog-text">85%</p><div class="progress"><span class="css" style="width: 85%;"></span></div></div>
+                    </div>
+                    <div class="progress-bar">
+                        <p class="prog-title">Networking (Firewalls, VPNs, Cisco)</p>
+                        <div class="progress-con"><p class="prog-text">80%</p><div class="progress"><span class="js" style="width: 80%;"></span></div></div>
+                    </div>
+                    <div class="progress-bar">
+                        <p class="prog-title">Databases (SQL, PL-SQL)</p>
+                        <div class="progress-con"><p class="prog-text">85%</p><div class="progress"><span class="react" style="width: 85%;"></span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="resume">
+            <div class="main-title">
+                <h2>My <span>Journey</span><span class="bg-text">Experience</span></h2>
+            </div>
+            <h4 class="stat-title">Experience & Research</h4>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-icon"><i class="fas fa-shield-alt"></i></div>
+                    <p class="tl-duration">05/2025 - Present</p>
+                    <h5>Cyber Security Volunteer<span> - Gujarat Police</span></h5>
+                    <p>Assisted police officials in identifying and reporting cybercrime cases. Conducted online safety awareness campaigns to promote responsible digital behavior.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-icon"><i class="fas fa-book"></i></div>
+                    <p class="tl-duration">Recent</p>
+                    <h5>Research & Technical Writing<span> - IoT Security</span></h5>
+                    <p>Authored a technical chapter focusing on security challenges and protection mechanisms for IoT devices in enterprise networks. Covered IoT architecture, threat vectors, and attack surfaces (Currently under review).</p>
+                </div>
+            </div>
+
+            <h4 class="stat-title">Education</h4>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <p class="tl-duration">06/2023 - 05/2028</p>
+                    <h5>Integrated Master of Computer Applications (IMCA)<span> - LJ University</span></h5>
+                    <p>Currently pursuing advanced studies in computer applications. Maintained a CGPA of 7.9.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-icon"><i class="fas fa-laptop-code"></i></div>
+                    <p class="tl-duration">06/2021 - 04/2023</p>
+                    <h5>Diploma in Computer Applications (DCA)<span> - Web Tech Institutes</span></h5>
+                    <p>Built foundational knowledge in programming, web technologies, and software development methodologies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="portfolio">
+            <div class="main-title">
+                <h2>My <span>Projects</span><span class="bg-text">Portfolio</span></h2>
+            </div>
+            <p class="port-text">Here is some of my core development work, showcasing Full Stack capabilities from Semester 1 to Advanced.</p>
+            <div class="portfolios">
+                
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port1.jpg' %}" alt="VASU Store"></div>
+                    <div class="hover-items">
+                        <h3>VASU Store (Django)</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Full-featured e-commerce platform with variations, cart, and admin panel using Django MVT.</p>
+                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port2.jpg' %}" alt="Student Management"></div>
+                    <div class="hover-items">
+                        <h3>Student Record System</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Multi-role Laravel dashboard for Admin/Teacher/Student with full CRUD using Eloquent ORM.</p>
+                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port6.jpg' %}" alt="Natural Fruity Bites"></div>
+                    <div class="hover-items">
+                        <h3>Natural Fruity Bites</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">A responsive e-commerce showcase platform for organic and natural fruit-based healthy treats.</p>
+                        <div class="icons">
+                            <a href="https://kamleshmodi-naturalfruitybite-official.onrender.com/" target="_blank" class="icon"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port3.jpg' %}" alt="QuizHunt"></div>
+                    <div class="hover-items">
+                        <h3>QuizHunt</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Dynamic quiz application for IT professionals to test knowledge and track learning progress.</p>
+                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port4.jpg' %}" alt="Make in India"></div>
+                    <div class="hover-items">
+                        <h3>Make in India Portal</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Informative web platform highlighting core sectors driving domestic manufacturing.</p>
+                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="image"><img src="{% static 'img/port5.jpg' %}" alt="Transport Services"></div>
+                    <div class="hover-items">
+                        <h3>Transport Services Hub</h3>
+                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Explores logistics and operational functionalities of 5 major transportation services.</p>
+                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+
+
+                {% for project in projects %}
+                <div class="portfolio-item">
+                    <div class="image">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    </div>
+                    <div class="hover-items">
+                        <h3>{{ project.title }}</h3>
+                        <div class="icons">
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" class="icon"><i class="fab fa-github"></i></a>
+                            {% endif %}
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" class="icon"><i class="fas fa-external-link-alt"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="container" id="certifications">
+            <div class="main-title">
+                <h2>My <span>Certifications</span><span class="bg-text">Achievements</span></h2>
+            </div>
+            
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <h4><i class="fab fa-google" style="color: var(--color-secondary);"></i> Google</h4>
+                    <p>Foundations of Cybersecurity</p>
+                    <a href="https://coursera.org/verify/YQS5GJWA3BD4" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-google" style="color: var(--color-secondary);"></i> Google</h4>
+                    <p>High-Fidelity Designs & Prototypes in Figma</p>
+                    <a href="https://coursera.org/verify/OHBUX2JONNIS" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-cloud" style="color: var(--color-secondary);"></i> Google Cloud</h4>
+                    <p>Security Principles in Cloud Computing</p>
+                    <a href="https://coursera.org/verify/A6HRIP0K52BG" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="cert-card">
+                    <h4><i class="fas fa-database" style="color: var(--color-secondary);"></i> IBM</h4>
+                    <p>Introduction to Relational Databases (RDBMS)</p>
+                    <a href="https://coursera.org/verify/6YKGXRR65JC7" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-server" style="color: var(--color-secondary);"></i> IBM</h4>
+                    <p>SQL: A Practical Introduction</p>
+                    <a href="https://coursera.org/verify/9XIIGFZP1VUM" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="cert-card">
+                    <h4><i class="fas fa-shield-virus" style="color: var(--color-secondary);"></i> Palo Alto Networks</h4>
+                    <p>Cybersecurity Foundation</p>
+                    <a href="https://coursera.org/verify/F58REENWQV8I" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-network-wired" style="color: var(--color-secondary);"></i> Cisco Academy</h4>
+                    <p>Introduction to Cybersecurity</p>
+                    <span class="verify-link" style="color:var(--color-grey-2);">Verified by NSDC</span>
+                </div>
+
+                <div class="cert-card">
+                    <h4><i class="fas fa-university" style="color: var(--color-secondary);"></i> Univ. of Maryland</h4>
+                    <p>Cybersecurity for Everyone</p>
+                    <a href="https://coursera.org/verify/X7C5FCFR0L5C" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-python" style="color: var(--color-secondary);"></i> Univ. of Michigan</h4>
+                    <p>Programming for Everybody (Python)</p>
+                    <a href="https://coursera.org/verify/48J453WVCJ1K" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-js" style="color: var(--color-secondary);"></i> Univ. of Michigan</h4>
+                    <p>Interactivity with JavaScript</p>
+                    <a href="https://coursera.org/verify/EGGRVUBK4TKL" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-html5" style="color: var(--color-secondary);"></i> Univ. of Michigan</h4>
+                    <p>Introduction to HTML5</p>
+                    <a href="https://coursera.org/verify/K3D5BGYZ6HWY" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-code" style="color: var(--color-secondary);"></i> UC Santa Cruz</h4>
+                    <p>C for Everyone: Programming Fundamentals</p>
+                    <a href="https://coursera.org/verify/S9895U4KLBG7" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="cert-card">
+                    <h4><i class="fab fa-laravel" style="color: var(--color-secondary);"></i> Board Infinity</h4>
+                    <p>Mastering Laravel Framework and PHP</p>
+                    <a href="https://coursera.org/verify/4M9XJ8MU36HZ" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-java" style="color: var(--color-secondary);"></i> Codio Certified</h4>
+                    <p>Java Basic Structures</p>
+                    <a href="https://coursera.org/verify/K9RT7RJYNODP" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fab fa-aws" style="color: var(--color-secondary);"></i> AWS & DevOps</h4>
+                    <p>DevOps 2026 - Masterclass (TrainWithShubham)</p>
+                    <span class="verify-link" style="color:var(--color-grey-2);">Cert ID: TWS23</span>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-briefcase" style="color: var(--color-secondary);"></i> Deloitte</h4>
+                    <p>Cyber Job Simulation</p>
+                    <span class="verify-link" style="color:var(--color-grey-2);">Cert ID: odNB4NfEqXHNymnPx</span>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-lock" style="color: var(--color-secondary);"></i> Reliance Foundation</h4>
+                    <p>Security Analyst Certificate</p>
+                    <span class="verify-link" style="color:var(--color-grey-2);">Cert ID: RFSA000137390</span>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-user-shield" style="color: var(--color-secondary);"></i> Tech Mahindra</h4>
+                    <p>Cybersecurity Foundation</p>
+                    <span class="verify-link" style="color:var(--color-grey-2);">Verified by Skill India</span>
+                </div>
+                <div class="cert-card">
+                    <h4><i class="fas fa-shield-alt" style="color: var(--color-secondary);"></i> Great Learning</h4>
+                    <p>Introduction to Information Security</p>
+                    <a href="https://verify.mygreatlearning.com/KDMVZRYP" target="_blank" class="verify-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container contact" id="contact">
+            <div class="contact-container">
+                <div class="main-title">
+                    <h2>Contact <span>Me</span><span class="bg-text">Contact</span></h2>
+                </div>
+                <div class="contact-content-con">
+                    <div class="left-contact">
+                        <h4>Let's Connect</h4>
+                        <p>Currently open for roles in Web Development, Cybersecurity analysis, and networking. Let's build something secure together!</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="icon"><i class="fas fa-envelope"></i><span>Email</span></div>
+                                <p><span>: kamleshmodi7878@gmail.com</span></p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="icon"><i class="fas fa-phone"></i><span>Mobile</span></div>
+                                <p><span>: +91 7878065935</span></p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="icon"><i class="fas fa-map-marker-alt"></i><span>Location</span></div>
+                                <p><span>: Ahmedabad, Gujarat 380016</span></p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="icon"><i class="fas fa-language"></i><span>Languages</span></div>
+                                <p><span>: Hindi, English, Gujarati</span></p>
+                            </div>
+                        </div>
+                        <div class="contact-icons">
+                            <div class="contact-icon">
+                                <a href="https://www.linkedin.com/in/kamlesh-kumar-ghanchi-6745262a8/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.github.com/Kamleshmodi" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-contact">
+                        <form action="" class="contact-form" method="POST">
+                            {% csrf_token %}
+                            <div class="input-control i-c-2">
+                                <input type="text" name="name" required placeholder="YOUR NAME">
+                                <input type="email" name="email" required placeholder="YOUR EMAIL">
+                            </div>
+                            <div class="input-control">
+                                <input type="text" name="subject" required placeholder="ENTER SUBJECT">
+                            </div>
+                            <div class="input-control">
+                                <textarea name="message" id="" cols="15" rows="8" placeholder="Message Here..."></textarea>
+                            </div>
+                            <div class="submit-btn">
+                                <button type="submit" class="main-btn">
+                                    <span class="btn-text">Send Message</span>
+                                    <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                                </button>
+                            </div>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p style="color: var(--color-secondary); margin-top: 15px;">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="controls">
+        <div class="control active-btn" data-id="home" title="Home"><i class="fas fa-home"></i></div>
+        <div class="control" data-id="about" title="About"><i class="fas fa-user"></i></div>
+        <div class="control" data-id="resume" title="Experience"><i class="fas fa-briefcase"></i></div>
+        <div class="control" data-id="portfolio" title="Projects"><i class="fas fa-code"></i></div>
+        <div class="control" data-id="certifications" title="Certifications"><i class="fas fa-award"></i></div>
+        <div class="control" data-id="contact" title="Contact"><i class="fas fa-envelope-open"></i></div>
+    </div>
+    
+    <div class="theme-btn">
+        <i class="fas fa-adjust"></i>
+    </div>
+    
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
