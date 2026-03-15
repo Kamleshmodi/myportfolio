@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name|default:"Kamlesh Kumar Ghanchi" }} | Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #edf2ea;
+            --panel: #ffffff;
+            --panel-soft: #f5f8f2;
+            --panel-dark: #153427;
+            --ink: #122019;
+            --muted: #53665b;
+            --accent: #2a9d61;
+            --accent-deep: #1a6a42;
+            --accent-soft: rgba(42, 157, 97, 0.13);
+            --line: rgba(18, 32, 25, 0.1);
+            --shadow: 0 26px 70px rgba(18, 32, 25, 0.08);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: 'Manrope', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(42,157,97,0.18), transparent 26%),
+                radial-gradient(circle at 85% 10%, rgba(21,52,39,0.12), transparent 22%),
+                linear-gradient(180deg, #f8fbf6 0%, var(--bg) 100%);
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .resume-shell {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 1.75rem 1.2rem 3.5rem;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .toolbar-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+        }
+        .toolbar-link,
+        .toolbar-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.9rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.86);
+            color: var(--ink);
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 10px 30px rgba(18, 32, 25, 0.04);
+        }
+        .toolbar-link.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .resume-frame {
+            display: grid;
+            gap: 1.3rem;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(290px, 0.95fr);
+            gap: 1.3rem;
+        }
+        .hero-card,
+        .contact-card,
+        .section-card {
+            border-radius: 30px;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .hero-card {
+            position: relative;
+            padding: 2.4rem;
+            background:
+                radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent 24%),
+                linear-gradient(135deg, #17392b 0%, #10271d 100%);
+            color: #f4fff8;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            inset: auto -70px -70px auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(42, 157, 97, 0.16);
+        }
+        .eyebrow {
+            display: inline-flex;
+            margin-bottom: 1rem;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
+        h1, h2, h3, h4 {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .hero-name {
+            font-size: clamp(2.7rem, 5vw, 4.35rem);
+            line-height: 0.98;
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-role {
+            margin: 1rem 0 0.9rem;
+            font-size: 1.05rem;
+            color: rgba(244, 255, 248, 0.78);
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-summary {
+            max-width: 760px;
+            margin: 0;
+            line-height: 1.9;
+            color: rgba(244, 255, 248, 0.84);
+            position: relative;
+            z-index: 1;
+        }
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .skill-pill {
+            padding: 0.68rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #effff6;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .contact-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f7faf5 100%);
+            padding: 2rem;
+            display: grid;
+            gap: 1rem;
+        }
+        .contact-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .status-pill {
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent-deep);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07rem;
+        }
+        .contact-list {
+            display: grid;
+            gap: 0.95rem;
+        }
+        .contact-item {
+            padding-bottom: 0.95rem;
+            border-bottom: 1px solid var(--line);
+        }
+        .contact-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .contact-label {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
+        .contact-value {
+            line-height: 1.65;
+            font-weight: 700;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .stat-card {
+            padding: 1.3rem 1.2rem;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid var(--line);
+            box-shadow: 0 16px 40px rgba(18, 32, 25, 0.05);
+        }
+        .stat-label {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
+        .stat-value {
+            font-size: 1.9rem;
+            font-weight: 800;
+            line-height: 1;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .stat-note {
+            margin-top: 0.4rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+            gap: 1.3rem;
+        }
+        .content-column {
+            display: grid;
+            gap: 1.3rem;
+        }
+        .section-card {
+            background: var(--panel);
+            padding: 1.8rem;
+        }
+        .section-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .section-title {
+            font-size: 1.6rem;
+        }
+        .section-kicker {
+            color: var(--accent-deep);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
+        .timeline {
+            display: grid;
+            gap: 1.1rem;
+        }
+        .timeline-item {
+            padding-left: 1.15rem;
+            border-left: 3px solid var(--accent-soft);
+        }
+        .timeline-item h3 {
+            font-size: 1.08rem;
+            margin-bottom: 0.35rem;
+        }
+        .timeline-meta {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-deep);
+            font-size: 0.92rem;
+            font-weight: 800;
+        }
+        .timeline-item p,
+        .bullet-list li,
+        .cert-list li {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+        .strength-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.85rem;
+        }
+        .strength-card {
+            padding: 1rem;
+            border-radius: 18px;
+            background: var(--panel-soft);
+            border: 1px solid rgba(18, 32, 25, 0.06);
+        }
+        .strength-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+        .strength-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 0.94rem;
+        }
+        .bullet-list,
+        .cert-list {
+            margin: 0;
+            padding-left: 1.15rem;
+            display: grid;
+            gap: 0.8rem;
+        }
+        .projects-card {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,252,247,0.98));
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .project-item {
+            height: 100%;
+            padding: 1.2rem;
+            border-radius: 22px;
+            border: 1px solid rgba(18, 32, 25, 0.08);
+            background:
+                linear-gradient(180deg, rgba(42,157,97,0.08), rgba(255,255,255,0.96) 38%);
+        }
+        .project-badge {
+            display: inline-flex;
+            margin-bottom: 0.75rem;
+            padding: 0.38rem 0.72rem;
+            border-radius: 999px;
+            background: rgba(21, 52, 39, 0.08);
+            color: var(--accent-deep);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.07rem;
+            text-transform: uppercase;
+        }
+        .project-title {
+            font-size: 1.08rem;
+            margin-bottom: 0.55rem;
+        }
+        .project-description {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+        .project-stack {
+            display: block;
+            margin-top: 0.8rem;
+            color: var(--accent-deep);
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.72rem 0.95rem;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid var(--line);
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+        .project-link.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+        @media (max-width: 1080px) {
+            .hero-grid,
+            .content-grid,
+            .stats-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 700px) {
+            .resume-shell {
+                padding: 1rem 0.85rem 2.4rem;
+            }
+            .hero-card,
+            .contact-card,
+            .section-card {
+                padding: 1.35rem;
+                border-radius: 24px;
+            }
+            .strength-grid {
+                grid-template-columns: 1fr;
+            }
+            .toolbar {
+                flex-direction: column;
+            }
+            .toolbar-group {
+                width: 100%;
+            }
+            .toolbar-link,
+            .toolbar-button {
+                width: 100%;
+            }
+        }
+        @media print {
+            body {
+                background: #fff;
+            }
+            .resume-shell {
+                max-width: none;
+                padding: 0;
+            }
+            .toolbar {
+                display: none;
+            }
+            .hero-card,
+            .contact-card,
+            .section-card,
+            .stat-card {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-shell">
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <a href="{% url 'home' %}" class="toolbar-link">Back to Portfolio</a>
+                <button class="toolbar-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+            </div>
+            {% if has_resume_file %}
+            <div class="toolbar-group">
+                <a href="{{ resume_url }}" class="toolbar-link primary" target="_blank" rel="noopener">Download Uploaded PDF</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="resume-frame">
+            <section class="hero-grid">
+                <article class="hero-card">
+                    <span class="eyebrow">Professional Resume</span>
+                    <h1 class="hero-name">{{ profile.name|default:"Kamlesh Kumar Ghanchi" }}</h1>
+                    <p class="hero-role">Full Stack Web Developer | Cybersecurity Enthusiast | Networking Learner</p>
+                    <p class="hero-summary">
+                        {{ profile.about_text|default:"I am a results-driven Full Stack Web Developer with a strong foundation in secure application development, computer networking, and cybersecurity. I specialize in Python, Django, and Laravel, blending clean code with robust security practices to build reliable digital solutions." }}
+                    </p>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Python & Django</span>
+                        <span class="skill-pill">Laravel & PHP</span>
+                        <span class="skill-pill">Cybersecurity</span>
+                        <span class="skill-pill">Networking</span>
+                        <span class="skill-pill">SQL / PL-SQL</span>
+                        <span class="skill-pill">Responsive Web Apps</span>
+                    </div>
+                </article>
+
+                <aside class="contact-card">
+                    <div class="contact-heading">
+                        <div>
+                            <span class="section-kicker">Contact</span>
+                            <h2>Reach Me</h2>
+                        </div>
+                        <span class="status-pill">Open to Roles</span>
+                    </div>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <span class="contact-label">Email</span>
+                            <div class="contact-value">kamleshmodi7878@gmail.com</div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Phone</span>
+                            <div class="contact-value">+91 7878065935</div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Location</span>
+                            <div class="contact-value">Ahmedabad, Gujarat, India</div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Profiles</span>
+                            <div class="contact-value">
+                                <a href="https://www.linkedin.com/in/kamlesh-kumar-ghanchi-6745262a8/" target="_blank" rel="noopener">LinkedIn</a>
+                                |
+                                <a href="https://www.github.com/Kamleshmodi" target="_blank" rel="noopener">GitHub</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Languages</span>
+                            <div class="contact-value">Hindi, English, Gujarati</div>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-label">Projects</span>
+                    <div class="stat-value">{{ project_count }}</div>
+                    <div class="stat-note">Complete portfolio projects visible below.</div>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Certifications</span>
+                    <div class="stat-value">18+</div>
+                    <div class="stat-note">Cybersecurity, cloud, databases, and web development.</div>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Current CGPA</span>
+                    <div class="stat-value">7.9</div>
+                    <div class="stat-note">Integrated Master of Computer Applications.</div>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Focus Areas</span>
+                    <div class="stat-value">3</div>
+                    <div class="stat-note">Development, security, and networking.</div>
+                </article>
+            </section>
+
+            <section class="content-grid">
+                <div class="content-column">
+                    <article class="section-card">
+                        <div class="section-head">
+                            <div>
+                                <span class="section-kicker">Experience</span>
+                                <h2 class="section-title">Hands-on Work</h2>
+                            </div>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h3>Cyber Security Volunteer</h3>
+                                <span class="timeline-meta">Gujarat Police | May 2025 - Present</span>
+                                <p>Supported cybercrime reporting efforts, helped identify digital fraud cases, and contributed to online safety awareness initiatives.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>Research & Technical Writing</h3>
+                                <span class="timeline-meta">IoT Security | Recent</span>
+                                <p>Authored a technical chapter on enterprise IoT security, covering architecture, attack surfaces, threat vectors, and protection mechanisms.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-head">
+                            <div>
+                                <span class="section-kicker">Education</span>
+                                <h2 class="section-title">Academic Journey</h2>
+                            </div>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h3>Integrated Master of Computer Applications</h3>
+                                <span class="timeline-meta">LJ University | Jun 2023 - May 2028</span>
+                                <p>Current CGPA: 7.9. Focused on development, system design, networking, and applied security.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>Diploma in Computer Applications</h3>
+                                <span class="timeline-meta">Web Tech Institutes | Jun 2021 - Apr 2023</span>
+                                <p>Built a strong foundation in programming, web technologies, software development, and practical project work.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="content-column">
+                    <article class="section-card">
+                        <div class="section-head">
+                            <div>
+                                <span class="section-kicker">Strengths</span>
+                                <h2 class="section-title">Core Skills</h2>
+                            </div>
+                        </div>
+                        <div class="strength-grid">
+                            <div class="strength-card">
+                                <h4>Web Development</h4>
+                                <p>Django, Laravel, Python, JavaScript, and responsive application building.</p>
+                            </div>
+                            <div class="strength-card">
+                                <h4>Security Thinking</h4>
+                                <p>Secure coding, vulnerability awareness, basic assessment, and cyber foundations.</p>
+                            </div>
+                            <div class="strength-card">
+                                <h4>Networking</h4>
+                                <p>Firewalls, VPNs, Cisco fundamentals, and practical infrastructure understanding.</p>
+                            </div>
+                            <div class="strength-card">
+                                <h4>Databases</h4>
+                                <p>SQL, PL-SQL, relational design, and application data handling.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-head">
+                            <div>
+                                <span class="section-kicker">Highlights</span>
+                                <h2 class="section-title">Career Snapshot</h2>
+                            </div>
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Focused on building secure, user-friendly web applications with practical business value.</li>
+                            <li>Comfortable moving between coding, deployment thinking, UI work, and security awareness.</li>
+                            <li>Actively strengthening profile through certifications, projects, and research-based learning.</li>
+                        </ul>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-head">
+                            <div>
+                                <span class="section-kicker">Certifications</span>
+                                <h2 class="section-title">Selected Learning</h2>
+                            </div>
+                        </div>
+                        <ul class="cert-list">
+                            <li>Google - Foundations of Cybersecurity</li>
+                            <li>Google Cloud - Security Principles in Cloud Computing</li>
+                            <li>IBM - Introduction to Relational Databases (RDBMS)</li>
+                            <li>Palo Alto Networks - Cybersecurity Foundation</li>
+                            <li>University of Michigan - Programming for Everybody (Python)</li>
+                            <li>Board Infinity - Mastering Laravel Framework and PHP</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-card projects-card">
+                <div class="section-head">
+                    <div>
+                        <span class="section-kicker">Projects</span>
+                        <h2 class="section-title">All Portfolio Work</h2>
+                    </div>
+                    <span class="status-pill">{{ project_count }} Projects</span>
+                </div>
+                <div class="projects-grid">
+                    {% for project in portfolio_projects %}
+                    <article class="project-item">
+                        {% if project.tag %}
+                        <span class="project-badge">{{ project.tag }}</span>
+                        {% endif %}
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-description">{{ project.description }}</p>
+                        {% if project.stack %}
+                        <span class="project-stack">{{ project.stack }}</span>
+                        {% endif %}
+                        <div class="project-links">
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" rel="noopener" class="project-link primary">Live Demo</a>
+                            {% endif %}
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="project-link">GitHub</a>
+                            {% endif %}
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

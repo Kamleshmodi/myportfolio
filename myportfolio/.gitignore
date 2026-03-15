@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 db.sqlite3
 media/
+test_media/
+staticfiles/
 
 # Virtual Environment
 venv/

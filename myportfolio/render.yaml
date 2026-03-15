@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: myportfolio
+    runtime: python
+    rootDir: myportfolio
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn myportfolio.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false

@@ -20,6 +20,17 @@
         .verify-link { display: inline-block; font-size: 0.85rem; color: var(--color-secondary); text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
         .verify-link:hover { color: var(--color-white); transform: translateX(5px); }
         .submit-btn button { background-color: transparent; outline: none; border: none; font-family: inherit; font-size: inherit; color: inherit; cursor: pointer; padding: 0;}
+        .resume-note { margin-top: 1rem; color: var(--color-grey-2); font-size: 0.95rem; max-width: 460px; }
+        .resume-highlight { margin: 2rem 0 4rem; padding: 2rem; border-radius: 18px; background: linear-gradient(135deg, rgba(39,174,96,0.16), rgba(25,29,43,0.96)); border: 1px solid rgba(39,174,96,0.35); display: flex; gap: 2rem; align-items: center; justify-content: space-between; }
+        .resume-highlight h4 { font-size: 1.6rem; margin-bottom: 0.7rem; color: var(--color-white); }
+        .resume-highlight p { color: var(--color-grey-2); line-height: 1.8rem; margin: 0; }
+        .resume-kicker { color: var(--color-secondary) !important; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 0.75rem !important; }
+        .resume-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .portfolio-tag { display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.9rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: rgba(25,29,43,0.28); color: var(--color-white); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08rem; text-transform: uppercase; }
+        .portfolio-copy { color: white; padding: 0 1rem; text-align: center; font-size: 12px; line-height: 1.6; }
+        @media (max-width: 900px) {
+            .resume-highlight { flex-direction: column; align-items: flex-start; }
+        }
     </style>
 </head>
 <body class="main-content">
@@ -29,7 +40,7 @@
             <div class="left-header">
                 <div class="h-shape"></div>
                 <div class="image">
-                    <img src="{% static 'img/hero.png' %}" alt="Kamlesh Kumar Ghanchi">
+                    <img src="{% static 'img/kamu.png' %}" alt="Kamlesh Kumar Ghanchi">
                 </div>
             </div>
             <div class="right-header">
@@ -41,8 +52,8 @@
                     {{ profile.about_text|default:"I am a results-driven Full Stack Web Developer with a strong foundation in secure application development, computer networking, and cybersecurity. I specialize in Python, Django, and Laravel, blending clean code with robust security practices to build reliable digital solutions." }}
                 </p>
                 <div class="btn-con">
-                    <a href="{% if profile.resume %}{{ profile.resume.url }}{% else %}{% static 'KAMLESH_RESUME5.pdf' %}{% endif %}" class="main-btn" target="_blank">
-                        <span class="btn-text">Download CV</span>
+                    <a href="{{ resume_url }}" class="main-btn" target="_blank" rel="noopener">
+                        <span class="btn-text">{% if has_resume_file %}Download CV{% else %}Open Resume{% endif %}</span>
                         <span class="btn-icon"><i class="fas fa-download"></i></span>
                     </a>
                 </div>
@@ -79,7 +90,7 @@
                     </div>
                     <div class="about-item">
                         <div class="abt-text">
-                            <p class="large-text">7+</p>
+                            <p class="large-text">{{ project_count }}</p>
                             <p class="small-text">Full Stack <br /> Projects</p>
                         </div>
                     </div>
@@ -119,6 +130,19 @@
             <div class="main-title">
                 <h2>My <span>Journey</span><span class="bg-text">Experience</span></h2>
             </div>
+            <div class="resume-highlight">
+                <div>
+                    <p class="resume-kicker">Resume Added</p>
+                    <h4>Professional web resume is now part of your portfolio.</h4>
+                    <p>Recruiters can open a dedicated resume page right now, and the same button can later point to your PDF once you upload it in the admin profile.</p>
+                </div>
+                <div class="resume-actions">
+                    <a href="{{ resume_url }}" class="main-btn" target="_blank" rel="noopener">
+                        <span class="btn-text">{% if has_resume_file %}Download CV{% else %}Open Resume{% endif %}</span>
+                        <span class="btn-icon"><i class="fas fa-file-alt"></i></span>
+                    </a>
+                </div>
+            </div>
             <h4 class="stat-title">Experience & Research</h4>
             <div class="timeline">
                 <div class="timeline-item">
@@ -156,79 +180,25 @@
             <div class="main-title">
                 <h2>My <span>Projects</span><span class="bg-text">Portfolio</span></h2>
             </div>
-            <p class="port-text">Here is some of my core development work, showcasing Full Stack capabilities from Semester 1 to Advanced.</p>
+            <p class="port-text">Here is some of my core development work, including the latest stock market project alongside my full stack portfolio.</p>
             <div class="portfolios">
-                
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port1.jpg' %}" alt="VASU Store"></div>
-                    <div class="hover-items">
-                        <h3>VASU Store (Django)</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Full-featured e-commerce platform with variations, cart, and admin panel using Django MVT.</p>
-                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port2.jpg' %}" alt="Student Management"></div>
-                    <div class="hover-items">
-                        <h3>Student Record System</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Multi-role Laravel dashboard for Admin/Teacher/Student with full CRUD using Eloquent ORM.</p>
-                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port6.jpg' %}" alt="Natural Fruity Bites"></div>
-                    <div class="hover-items">
-                        <h3>Natural Fruity Bites</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">A responsive e-commerce showcase platform for organic and natural fruit-based healthy treats.</p>
-                        <div class="icons">
-                            <a href="https://kamleshmodi-naturalfruitybite-official.onrender.com/" target="_blank" class="icon"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port3.jpg' %}" alt="QuizHunt"></div>
-                    <div class="hover-items">
-                        <h3>QuizHunt</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Dynamic quiz application for IT professionals to test knowledge and track learning progress.</p>
-                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port4.jpg' %}" alt="Make in India"></div>
-                    <div class="hover-items">
-                        <h3>Make in India Portal</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Informative web platform highlighting core sectors driving domestic manufacturing.</p>
-                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="image"><img src="{% static 'img/port5.jpg' %}" alt="Transport Services"></div>
-                    <div class="hover-items">
-                        <h3>Transport Services Hub</h3>
-                        <p style="color:white; padding: 0 1rem; text-align:center; font-size:12px;">Explores logistics and operational functionalities of 5 major transportation services.</p>
-                        <div class="icons"><a href="https://www.github.com/Kamleshmodi" target="_blank" class="icon"><i class="fab fa-github"></i></a></div>
-                    </div>
-                </div>
-
-
-                {% for project in projects %}
+                {% for project in portfolio_projects %}
                 <div class="portfolio-item">
                     <div class="image">
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        <img src="{{ project.image_url }}" alt="{{ project.title }}">
                     </div>
                     <div class="hover-items">
+                        {% if project.tag %}
+                        <span class="portfolio-tag">{{ project.tag }}</span>
+                        {% endif %}
                         <h3>{{ project.title }}</h3>
+                        <p class="portfolio-copy">{{ project.description }}</p>
                         <div class="icons">
                             {% if project.github_link %}
-                            <a href="{{ project.github_link }}" target="_blank" class="icon"><i class="fab fa-github"></i></a>
+                            <a href="{{ project.github_link }}" target="_blank" class="icon" rel="noopener"><i class="fab fa-github"></i></a>
                             {% endif %}
                             {% if project.live_link %}
-                            <a href="{{ project.live_link }}" target="_blank" class="icon"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="{{ project.live_link }}" target="_blank" class="icon" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
                             {% endif %}
                         </div>
                     </div>
@@ -369,7 +339,7 @@
                             </div>
                             <div class="contact-item">
                                 <div class="icon"><i class="fas fa-language"></i><span>Languages</span></div>
-                                <p><span>: Hindi, English, Gujarati</span></p>
+                                <p><span>: Hindi, English, Gujarati, Rajasthani</span></p>
                             </div>
                         </div>
                         <div class="contact-icons">

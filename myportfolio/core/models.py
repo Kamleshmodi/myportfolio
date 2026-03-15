@@ -13,8 +13,15 @@ class Profile(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='portfolio_images/')
+    summary = models.TextField(blank=True)
+    stack = models.CharField(max_length=255, blank=True)
+    badge = models.CharField(max_length=60, blank=True)
+    sort_order = models.PositiveIntegerField(default=100)
     github_link = models.URLField(blank=True, null=True)
     live_link = models.URLField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['sort_order', 'title']
 
     def __str__(self):
         return self.title
