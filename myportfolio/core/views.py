@@ -26,7 +26,7 @@ def build_portfolio_projects(stored_projects):
             'tag': 'Django',
             'stack': 'Django, Cart Flow, Admin Panel',
             'github_link': 'https://www.github.com/Kamleshmodi',
-            'live_link': '',
+            'live_link': 'https://vasu-dev.onrender.com/',
             'sort_order': 20,
         },
         {
